@@ -1,0 +1,15 @@
+[
+{
+  "modid": "industrialkitchen",
+  "name": "Industrial Kitchen",
+  "description": "A food and cooking mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "logoFile": "assets/industrialkitchen/logo.png",
+  "url": "https://minecraft.curseforge.com/projects/industrialkitchen",
+  "updateUrl": "",
+  "authorList": [ "pkmnfrk" ],
+  "parent": "",
+  "screenshots": []
+}
+]
