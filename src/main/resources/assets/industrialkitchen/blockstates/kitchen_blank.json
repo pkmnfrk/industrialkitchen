@@ -1,0 +1,598 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "industrialkitchen:bordered_cube",
+    "textures": {
+      "side_face": "industrialkitchen:blocks/kitchen_blank",
+      "north_border": "industrialkitchen:blocks/kitchen_border",
+      "south_border": "industrialkitchen:blocks/kitchen_border",
+      "east_border": "industrialkitchen:blocks/kitchen_border",
+      "west_border": "industrialkitchen:blocks/kitchen_border",
+      "up_border": "industrialkitchen:blocks/kitchen_border",
+      "down_border": "industrialkitchen:blocks/kitchen_border"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {}
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=false,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=true,connected_up=false,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=false,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=true,connected_up=true,connected_west=false": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=false,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=true,connected_up=false,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=false,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=false,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=false,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=false,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=false,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=false,connected_north=true,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=false,connected_north=true,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=false,connected_east=true,connected_north=true,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ],
+    "connected_down=true,connected_east=true,connected_north=true,connected_south=true,connected_up=true,connected_west=true": [
+      {
+        "textures": {
+          "down_border": "industrialkitchen:blocks/kitchen_noborder",
+          "east_border": "industrialkitchen:blocks/kitchen_noborder",
+          "north_border": "industrialkitchen:blocks/kitchen_noborder",
+          "south_border": "industrialkitchen:blocks/kitchen_noborder",
+          "up_border": "industrialkitchen:blocks/kitchen_noborder",
+          "west_border": "industrialkitchen:blocks/kitchen_noborder"
+        }
+      }
+    ]
+  }
+}

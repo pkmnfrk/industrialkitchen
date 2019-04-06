@@ -20,8 +20,8 @@ import java.lang.reflect.Modifier;
 @GameRegistry.ObjectHolder (IndustrialKitchen.modId)
 public class ModBlocks
 {
-    //@GameRegistry.ObjectHolder(TransmutationChamber.ID_TRANSMUTATION_CHAMBER)
-    //public static TransmutationChamber transmutationChamber;
+    @GameRegistry.ObjectHolder(BlockKitchenBlank.ID)
+    public static BlockKitchenBlank kitchenBlank;
 
 
     @SubscribeEvent
@@ -29,7 +29,7 @@ public class ModBlocks
     {
         IForgeRegistry<Block> registry = event.getRegistry();
 
-        //registry.register(new TransmutationChamber(TransmutationChamber.ID_TRANSMUTATION_CHAMBER));
+        registry.register(new BlockKitchenBlank());
 
         //GameRegistry.registerTileEntity(TransmutationChamberTileEntity.class, new ResourceLocation(IndustrialKitchen.modId, TransmutationChamber.ID_TRANSMUTATION_CHAMBER));
     }
