@@ -6,12 +6,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -19,9 +24,17 @@ public class BlockHotplate
     extends BlockBase
 {
     public static final String ID = "hotplate";
-    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+    private static final AxisAlignedBB BOUNDING_BOX_EMPTY = new AxisAlignedBB(
         1/16.0, 0, 1/16.0,
         15/16.0, 1/8.0, 15/16.0
+    );
+    private static final AxisAlignedBB BOUNDING_BOX_PAN = new AxisAlignedBB(
+        1/16.0, 0, 1/16.0,
+        15/16.0, 3/8.0, 15/16.0
+    );
+    private static final AxisAlignedBB BOUNDING_BOX_POT = new AxisAlignedBB(
+        1/16.0, 0, 1/16.0,
+        15/16.0, 3/4.0, 15/16.0
     );
     private static final PropertyEnum<TileEntityHotplate.EnumTool> TOOL = PropertyEnum.create("tool", TileEntityHotplate.EnumTool.class);
 
@@ -46,9 +59,28 @@ public class BlockHotplate
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state)
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state)
     {
         return new TileEntityHotplate();
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+        if(worldIn.isRemote || hand != EnumHand.MAIN_HAND)
+            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+
+        TileEntityHotplate tileEntity = getTileEntity(worldIn, pos);
+        if(tileEntity != null)
+        {
+            ItemStack handItem = playerIn.getHeldItem(hand);
+
+            handItem = tileEntity.insertTool(handItem);
+
+            playerIn.setHeldItem(hand, handItem);
+        }
+
+        return true;
     }
 
     @Override
@@ -67,6 +99,7 @@ public class BlockHotplate
     }
 
     @Override
+    @Nonnull
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState();
@@ -79,15 +112,31 @@ public class BlockHotplate
     }
 
     @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    @Nonnull
+    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
-        TileEntityHotplate te = (TileEntityHotplate)worldIn.getTileEntity(pos);
+        TileEntityHotplate te = getTileEntity(worldIn, pos);
         if(te != null)
         {
             state = state.withProperty(TOOL, te.getTool());
         }
+        else
+        {
+            state = state.withProperty(TOOL, TileEntityHotplate.EnumTool.NONE);
+        }
 
         return state;
+    }
+
+    @Nullable
+    private TileEntityHotplate getTileEntity(IBlockAccess worldIn, BlockPos pos)
+    {
+        TileEntity ret = worldIn.getTileEntity(pos);
+
+        if(ret instanceof TileEntityHotplate)
+            return (TileEntityHotplate)ret;
+
+        return null;
     }
 
     @Override
@@ -97,9 +146,21 @@ public class BlockHotplate
     }
 
     @Override
+    @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return BOUNDING_BOX;
+        TileEntityHotplate te = getTileEntity(source, pos);
+        if(te != null)
+        {
+            switch(te.getTool())
+            {
+                case PAN:
+                    return BOUNDING_BOX_PAN;
+                case POT:
+                    return BOUNDING_BOX_POT;
+            }
+        }
+        return BOUNDING_BOX_EMPTY;
     }
 
     @Override

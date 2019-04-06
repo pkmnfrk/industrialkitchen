@@ -2,10 +2,12 @@ package com.mike_caron.industrialkitchen.block;
 
 import com.mike_caron.industrialkitchen.IndustrialKitchen;
 import com.mike_caron.industrialkitchen.block.appliance.BlockHotplate;
+import com.mike_caron.industrialkitchen.tileentity.TileEntityHotplate;
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,7 +38,7 @@ public class ModBlocks
         registry.register(new BlockKitchenBlank());
         registry.register(new BlockHotplate());
 
-        //GameRegistry.registerTileEntity(TransmutationChamberTileEntity.class, new ResourceLocation(IndustrialKitchen.modId, TransmutationChamber.ID_TRANSMUTATION_CHAMBER));
+        GameRegistry.registerTileEntity(TileEntityHotplate.class, new ResourceLocation(IndustrialKitchen.modId, BlockHotplate.ID));
     }
 
     @SuppressWarnings("ConstantConditions")

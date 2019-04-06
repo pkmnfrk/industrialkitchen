@@ -1,6 +1,7 @@
 package com.mike_caron.industrialkitchen.item;
 
 import com.mike_caron.industrialkitchen.IndustrialKitchen;
+import com.mike_caron.industrialkitchen.item.cookware.ItemPan;
 import com.mike_caron.mikesmodslib.item.ItemBase;
 import com.mike_caron.mikesmodslib.util.MappedModelLoader;
 import net.minecraft.item.Item;
@@ -20,11 +21,16 @@ import java.lang.reflect.Modifier;
 @GameRegistry.ObjectHolder(IndustrialKitchen.modId)
 public class ModItems
 {
+
+    @GameRegistry.ObjectHolder(ItemPan.ID)
+    public static final ItemPan pan = null;
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         IForgeRegistry<Item> registry = event.getRegistry();
 
+        registry.register(new ItemPan());
 
     }
 

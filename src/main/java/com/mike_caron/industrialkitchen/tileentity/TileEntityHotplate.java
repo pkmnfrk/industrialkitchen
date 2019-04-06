@@ -1,6 +1,9 @@
 package com.mike_caron.industrialkitchen.tileentity;
 
+import com.mike_caron.industrialkitchen.item.ModItems;
 import com.mike_caron.mikesmodslib.block.TileEntityBase;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IStringSerializable;
 
@@ -9,32 +12,78 @@ import javax.annotation.Nonnull;
 public class TileEntityHotplate
     extends TileEntityBase
 {
-    EnumTool tool;
+    ItemStack tool;
 
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
 
-        tool = EnumTool.NONE;
+        tool = null;
 
         if(compound.hasKey("tool"))
         {
-            tool = EnumTool.valueOf(compound.getString("tool"));
+            tool = new ItemStack(compound.getCompoundTag("tool"));
+        }
+
+        if(world != null && world.isRemote)
+        {
+            markAndNotify();
         }
     }
 
     public EnumTool getTool()
     {
-        return tool;
+        if(tool == null)
+            return EnumTool.NONE;
+
+        if(tool.getItem() == ModItems.pan)
+            return EnumTool.PAN;
+
+        return EnumTool.NONE;
+    }
+
+    @Nonnull
+    public ItemStack insertTool(@Nonnull ItemStack itemStack)
+    {
+        if(tool != null && !itemStack.isEmpty())
+        {
+            return itemStack;
+        }
+
+        ItemStack ret = tool;
+
+        IBlockState oldState = world.getBlockState(pos);
+
+        if(itemStack.isEmpty())
+        {
+            tool = null;
+        }
+        else
+        {
+            tool = itemStack;
+        }
+
+        IBlockState newState = world.getBlockState(pos);
+
+        markAndNotify(oldState, newState);
+
+        if(ret == null)
+            ret = ItemStack.EMPTY;
+
+        return ret;
     }
 
     @Override
+    @Nonnull
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         NBTTagCompound ret = super.writeToNBT(compound);
 
-        ret.setString("tool", tool.getName());
+        if(tool != null)
+        {
+            ret.setTag("tool", tool.serializeNBT());
+        }
 
         return ret;
     }
