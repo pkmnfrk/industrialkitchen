@@ -1,6 +1,7 @@
 package com.mike_caron.industrialkitchen.block;
 
 import com.mike_caron.industrialkitchen.IndustrialKitchen;
+import com.mike_caron.industrialkitchen.block.appliance.BlockHotplate;
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -23,6 +24,9 @@ public class ModBlocks
     @GameRegistry.ObjectHolder(BlockKitchenBlank.ID)
     public static BlockKitchenBlank kitchenBlank;
 
+    @GameRegistry.ObjectHolder(BlockHotplate.ID)
+    public static BlockHotplate hotplate;
+
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -30,6 +34,7 @@ public class ModBlocks
         IForgeRegistry<Block> registry = event.getRegistry();
 
         registry.register(new BlockKitchenBlank());
+        registry.register(new BlockHotplate());
 
         //GameRegistry.registerTileEntity(TransmutationChamberTileEntity.class, new ResourceLocation(IndustrialKitchen.modId, TransmutationChamber.ID_TRANSMUTATION_CHAMBER));
     }

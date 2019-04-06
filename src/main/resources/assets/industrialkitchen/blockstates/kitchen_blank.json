@@ -17,7 +17,9 @@
       {}
     ],
     "inventory": [
-      {}
+      {
+        "textures": {}
+      }
     ],
     "connected_down=false,connected_east=false,connected_north=false,connected_south=false,connected_up=false,connected_west=false": [
       {

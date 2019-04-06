@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
 		"7": "industrialkitchen:blocks/kitchen_border",
 		"side_face": "industrialkitchen:blocks/kitchen_blank",
