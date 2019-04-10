@@ -1,10 +1,10 @@
 package com.mike_caron.industrialkitchen.block.appliance;
 
+import com.mike_caron.industrialkitchen.block.Props;
 import com.mike_caron.industrialkitchen.tileentity.appliance.TileEntityHotplate;
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,8 +39,6 @@ public class BlockHotplate
     );
     private static final PropertyEnum<TileEntityHotplate.EnumTool> TOOL = PropertyEnum.create("tool", TileEntityHotplate.EnumTool.class);
 
-    private static final PropertyBool IS_LIT = PropertyBool.create("lit");
-
     public BlockHotplate()
     {
         super(Material.IRON, ID);
@@ -71,7 +69,7 @@ public class BlockHotplate
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         if(worldIn.isRemote || hand != EnumHand.MAIN_HAND)
-            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+            return true; //super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 
         TileEntityHotplate tileEntity = getTileEntity(worldIn, pos);
         if(tileEntity != null)
@@ -91,7 +89,7 @@ public class BlockHotplate
     {
         return super.addStateProperties(blockState)
             .withProperty(TOOL, TileEntityHotplate.EnumTool.PAN)
-            .withProperty(IS_LIT, false);
+            .withProperty(Props.IS_LIT, false);
     }
 
     @Override
@@ -100,7 +98,7 @@ public class BlockHotplate
         super.addAdditionalPropeties(properties);
 
         properties.add(TOOL);
-        properties.add(IS_LIT);
+        properties.add(Props.IS_LIT);
     }
 
     @Override
@@ -125,13 +123,13 @@ public class BlockHotplate
         {
             state = state
                 .withProperty(TOOL, te.getTool())
-                .withProperty(IS_LIT, te.isValid());
+                .withProperty(Props.IS_LIT, te.isValid());
         }
         else
         {
             state = state
                 .withProperty(TOOL, TileEntityHotplate.EnumTool.NONE)
-                .withProperty(IS_LIT, false);
+                .withProperty(Props.IS_LIT, false);
         }
 
         return state;

@@ -2,6 +2,7 @@ package com.mike_caron.industrialkitchen.tileentity.appliance;
 
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
 import com.mike_caron.industrialkitchen.item.ModItems;
+import com.mike_caron.industrialkitchen.item.cookware.ItemPan;
 import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenPlug;
 import com.mike_caron.mikesmodslib.util.TileEntityProxy;
 import net.minecraft.block.state.IBlockState;
@@ -47,10 +48,21 @@ public class TileEntityHotplate
         return EnumTool.NONE;
     }
 
+    public boolean isValidTool(@Nonnull ItemStack itemStack)
+    {
+        if(itemStack.isEmpty())
+            return true;
+
+        if(itemStack.getItem() instanceof ItemPan)
+            return true;
+
+        return false;
+    }
+
     @Nonnull
     public ItemStack insertTool(@Nonnull ItemStack itemStack)
     {
-        if(tool != null && !itemStack.isEmpty())
+        if(!isValidTool(itemStack))
         {
             return itemStack;
         }
