@@ -60,7 +60,7 @@ public class TileEntityKitchenPlug
 
     public static BlockPos findClosest(@Nonnull World world, @Nonnull BlockPos start)
     {
-        return MultiblockUtil.findClosest(world, start, BlockKitchenBase.class, block -> block.getBlock() instanceof BlockKitchenPlug);
+        return MultiblockUtil.walkMultiblock(world, start, BlockKitchenBase.class, block -> block.getBlock() instanceof BlockKitchenPlug);
     }
 
 
