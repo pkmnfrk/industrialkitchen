@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -16,6 +17,7 @@ import javax.annotation.Nullable;
 
 public class TileEntityHotplate
     extends TileEntityBase
+    implements ITickable
 {
     ItemStack tool;
 
@@ -26,6 +28,12 @@ public class TileEntityHotplate
         protected BlockPos findTileEntity(@Nonnull World world)
         {
             return TileEntityKitchenPlug.findClosest(world, getPos().offset(EnumFacing.DOWN));
+        }
+
+        @Override
+        protected void markDirty()
+        {
+            TileEntityHotplate.this.markAndNotify();
         }
     };
 
@@ -113,6 +121,14 @@ public class TileEntityHotplate
     public boolean isValid()
     {
         return plug.isValid();
+    }
+
+    @Override
+    public void update()
+    {
+        TileEntityKitchenPlug plugEntity = plug.getTileEntity(world);
+
+
     }
 
     public enum EnumTool
