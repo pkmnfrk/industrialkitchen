@@ -2,7 +2,12 @@ package com.mike_caron.industrialkitchen.block;
 
 import com.mike_caron.industrialkitchen.IndustrialKitchen;
 import com.mike_caron.industrialkitchen.block.appliance.BlockHotplate;
+import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenBlank;
+import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenOven;
+import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
+import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenTap;
 import com.mike_caron.industrialkitchen.tileentity.TileEntityHotplate;
+import com.mike_caron.industrialkitchen.tileentity.TileEntityKitchenPlug;
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -26,6 +31,15 @@ public class ModBlocks
     @GameRegistry.ObjectHolder(BlockKitchenBlank.ID)
     public static BlockKitchenBlank kitchenBlank;
 
+    @GameRegistry.ObjectHolder(BlockKitchenTap.ID)
+    public static BlockKitchenTap kitchenTap;
+
+    @GameRegistry.ObjectHolder(BlockKitchenPlug.ID)
+    public static BlockKitchenPlug kitchenPlug;
+
+    @GameRegistry.ObjectHolder(BlockKitchenOven.ID)
+    public static BlockKitchenOven kitchenOven;
+
     @GameRegistry.ObjectHolder(BlockHotplate.ID)
     public static BlockHotplate hotplate;
 
@@ -36,9 +50,13 @@ public class ModBlocks
         IForgeRegistry<Block> registry = event.getRegistry();
 
         registry.register(new BlockKitchenBlank());
+        registry.register(new BlockKitchenTap());
+        registry.register(new BlockKitchenPlug());
+        registry.register(new BlockKitchenOven());
         registry.register(new BlockHotplate());
 
         GameRegistry.registerTileEntity(TileEntityHotplate.class, new ResourceLocation(IndustrialKitchen.modId, BlockHotplate.ID));
+        GameRegistry.registerTileEntity(TileEntityKitchenPlug.class, new ResourceLocation(IndustrialKitchen.modId, BlockKitchenPlug.ID));
     }
 
     @SuppressWarnings("ConstantConditions")

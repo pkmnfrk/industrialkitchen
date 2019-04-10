@@ -1,4 +1,4 @@
-package com.mike_caron.industrialkitchen.block;
+package com.mike_caron.industrialkitchen.block.kitchen;
 
 public class BlockKitchenBlank
     extends BlockKitchenBase

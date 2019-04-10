@@ -4,6 +4,7 @@ import com.mike_caron.industrialkitchen.tileentity.TileEntityHotplate;
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,6 +38,8 @@ public class BlockHotplate
         15/16.0, 3/4.0, 15/16.0
     );
     private static final PropertyEnum<TileEntityHotplate.EnumTool> TOOL = PropertyEnum.create("tool", TileEntityHotplate.EnumTool.class);
+
+    private static final PropertyBool IS_LIT = PropertyBool.create("lit");
 
     public BlockHotplate()
     {
@@ -87,7 +90,8 @@ public class BlockHotplate
     protected IBlockState addStateProperties(IBlockState blockState)
     {
         return super.addStateProperties(blockState)
-            .withProperty(TOOL, TileEntityHotplate.EnumTool.PAN);
+            .withProperty(TOOL, TileEntityHotplate.EnumTool.PAN)
+            .withProperty(IS_LIT, false);
     }
 
     @Override
@@ -96,6 +100,7 @@ public class BlockHotplate
         super.addAdditionalPropeties(properties);
 
         properties.add(TOOL);
+        properties.add(IS_LIT);
     }
 
     @Override
@@ -118,11 +123,15 @@ public class BlockHotplate
         TileEntityHotplate te = getTileEntity(worldIn, pos);
         if(te != null)
         {
-            state = state.withProperty(TOOL, te.getTool());
+            state = state
+                .withProperty(TOOL, te.getTool())
+                .withProperty(IS_LIT, te.isValid());
         }
         else
         {
-            state = state.withProperty(TOOL, TileEntityHotplate.EnumTool.NONE);
+            state = state
+                .withProperty(TOOL, TileEntityHotplate.EnumTool.NONE)
+                .withProperty(IS_LIT, false);
         }
 
         return state;

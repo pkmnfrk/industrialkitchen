@@ -2,35 +2,32 @@ package com.mike_caron.industrialkitchen.tileentity;
 
 import com.mike_caron.industrialkitchen.item.ModItems;
 import com.mike_caron.mikesmodslib.block.TileEntityBase;
+import com.mike_caron.mikesmodslib.util.TileEntityProxy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileEntityHotplate
     extends TileEntityBase
 {
     ItemStack tool;
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound)
+    TileEntityProxy<TileEntityKitchenPlug> plug = new TileEntityProxy<TileEntityKitchenPlug>()
     {
-        super.readFromNBT(compound);
-
-        tool = null;
-
-        if(compound.hasKey("tool"))
+        @Nullable
+        @Override
+        protected BlockPos findTileEntity(@Nonnull World world)
         {
-            tool = new ItemStack(compound.getCompoundTag("tool"));
+            return TileEntityKitchenPlug.findClosest(world, getPos().offset(EnumFacing.DOWN));
         }
-
-        if(world != null && world.isRemote)
-        {
-            markAndNotify();
-        }
-    }
+    };
 
     public EnumTool getTool()
     {
@@ -75,6 +72,29 @@ public class TileEntityHotplate
     }
 
     @Override
+    public void readFromNBT(NBTTagCompound compound)
+    {
+        super.readFromNBT(compound);
+
+        tool = null;
+
+        if(compound.hasKey("tool"))
+        {
+            tool = new ItemStack(compound.getCompoundTag("tool"));
+        }
+
+        if(compound.hasKey("plug"))
+        {
+            plug.deserializeNBT(compound.getCompoundTag("plug"));
+        }
+
+        if(world != null && world.isRemote)
+        {
+            markAndNotify();
+        }
+    }
+
+    @Override
     @Nonnull
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
@@ -85,7 +105,14 @@ public class TileEntityHotplate
             ret.setTag("tool", tool.serializeNBT());
         }
 
+        ret.setTag("plug", plug.serializeNBT());
+
         return ret;
+    }
+
+    public boolean isValid()
+    {
+        return plug.isValid();
     }
 
     public enum EnumTool

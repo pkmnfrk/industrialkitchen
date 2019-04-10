@@ -1,4 +1,4 @@
-package com.mike_caron.industrialkitchen.block;
+package com.mike_caron.industrialkitchen.block.kitchen;
 
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.material.Material;
@@ -8,8 +8,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class BlockKitchenBase
     extends BlockBase
@@ -96,5 +100,67 @@ public class BlockKitchenBase
 
         final IBlockState state = world.getBlockState(pos.offset(side));
         return state.getBlock() instanceof BlockKitchenBase;
+    }
+
+    public static BlockPos findClosest(@Nonnull World world, @Nonnull BlockPos start, Class<? extends BlockKitchenBase> search)
+    {
+        HashSet<Long> explored = new HashSet<>();
+        PriorityQueue<DistPos> toExplore = new PriorityQueue<>(DistPos::compare);
+
+        toExplore.add(new DistPos(start, 0));
+
+        while(!toExplore.isEmpty())
+        {
+            DistPos spot = toExplore.remove();
+
+            if(explored.contains(spot.toLong()))
+                continue;
+
+            explored.add(spot.toLong());
+
+            IBlockState block = world.getBlockState(spot);
+
+            if(!(block.getBlock() instanceof BlockKitchenBase))
+                continue;
+
+            if(search.isInstance(block.getBlock()))
+                return spot;
+
+            for(EnumFacing dir : EnumFacing.VALUES)
+            {
+                toExplore.add(spot.offset(dir));
+            }
+        }
+
+        return null;
+    }
+
+    private static class DistPos
+        extends BlockPos
+    {
+        public final int dist;
+
+        DistPos(BlockPos pos, int distance)
+        {
+            super(pos.getX(), pos.getY(), pos.getZ());
+
+            this.dist = distance;
+        }
+
+        public static int compare(DistPos a, DistPos b)
+        {
+            int ret = b.dist - a.dist;
+
+            if(ret != 0) return ret;
+
+            return a.compareTo(b);
+        }
+
+        @Override
+        @Nonnull
+        public DistPos offset(@Nonnull EnumFacing facing)
+        {
+            return new DistPos(super.offset(facing), dist + 1);
+        }
     }
 }

@@ -4,6 +4,7 @@
 	"textures": {
 		"7": "industrialkitchen:blocks/kitchen_border",
 		"side_face": "industrialkitchen:blocks/kitchen_blank",
+		"top_face": "industrialkitchen:blocks/kitchen_blank",
 		"particle": "industrialkitchen:blocks/kitchen_blank",
 		"north_border": "industrialkitchen:blocks/kitchen_border",
 		"south_border": "industrialkitchen:blocks/kitchen_border",
@@ -33,8 +34,8 @@
 			"from": [1, 0, 1],
 			"to": [15, 16, 15],
 			"faces": {
-				"up": {"uv": [1, 1, 15, 15], "texture": "#side_face", "cullface": "up"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#side_face", "cullface": "down"}
+				"up": {"uv": [1, 1, 15, 15], "texture": "#top_face", "cullface": "up"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#top_face", "cullface": "down"}
 			}
 		},
 		{

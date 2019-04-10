@@ -23,7 +23,7 @@ public class ModItems
 {
 
     @GameRegistry.ObjectHolder(ItemPan.ID)
-    public static final ItemPan pan = null;
+    public static ItemPan pan;
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)

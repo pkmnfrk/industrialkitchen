@@ -17,6 +17,14 @@
       },
       "pot": {
       }
+    },
+    "lit": {
+      "true": {
+        "textures": {
+          "0": "industrialkitchen:blocks/hotplate_lit"
+        }
+      },
+      "false": {}
     }
   }
 }
