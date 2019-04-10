@@ -71,7 +71,7 @@ public class BlockHotplate
         if(worldIn.isRemote || hand != EnumHand.MAIN_HAND)
             return true; //super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 
-        TileEntityHotplate tileEntity = getTileEntity(worldIn, pos);
+        TileEntityHotplate tileEntity = getTileEntity(worldIn, pos, TileEntityHotplate.class);
         if(tileEntity != null)
         {
             ItemStack handItem = playerIn.getHeldItem(hand);
@@ -118,7 +118,7 @@ public class BlockHotplate
     @Nonnull
     public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
-        TileEntityHotplate te = getTileEntity(worldIn, pos);
+        TileEntityHotplate te = getTileEntity(worldIn, pos, TileEntityHotplate.class);
         if(te != null)
         {
             state = state
@@ -135,17 +135,6 @@ public class BlockHotplate
         return state;
     }
 
-    @Nullable
-    private TileEntityHotplate getTileEntity(IBlockAccess worldIn, BlockPos pos)
-    {
-        TileEntity ret = worldIn.getTileEntity(pos);
-
-        if(ret instanceof TileEntityHotplate)
-            return (TileEntityHotplate)ret;
-
-        return null;
-    }
-
     @Override
     public boolean isFullBlock(IBlockState state)
     {
@@ -156,7 +145,7 @@ public class BlockHotplate
     @Nonnull
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        TileEntityHotplate te = getTileEntity(source, pos);
+        TileEntityHotplate te = getTileEntity(source, pos, TileEntityHotplate.class);
         if(te != null)
         {
             switch(te.getTool())

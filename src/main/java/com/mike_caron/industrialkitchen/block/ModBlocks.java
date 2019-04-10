@@ -7,6 +7,7 @@ import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenOven;
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenTap;
 import com.mike_caron.industrialkitchen.tileentity.appliance.TileEntityHotplate;
+import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenOven;
 import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenPlug;
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.Block;
@@ -57,6 +58,7 @@ public class ModBlocks
 
         GameRegistry.registerTileEntity(TileEntityHotplate.class, new ResourceLocation(IndustrialKitchen.modId, BlockHotplate.ID));
         GameRegistry.registerTileEntity(TileEntityKitchenPlug.class, new ResourceLocation(IndustrialKitchen.modId, BlockKitchenPlug.ID));
+        GameRegistry.registerTileEntity(TileEntityKitchenOven.class, new ResourceLocation(IndustrialKitchen.modId, BlockKitchenOven.ID));
     }
 
     @SuppressWarnings("ConstantConditions")

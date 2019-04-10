@@ -3,7 +3,6 @@ package com.mike_caron.industrialkitchen.tileentity.kitchen;
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
 import com.mike_caron.mikesmodslib.util.TileEntityProxy;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
@@ -18,7 +17,7 @@ public class TileEntityKitchenOven
         @Override
         protected BlockPos findTileEntity()
         {
-            return BlockKitchenPlug.findClosest(world, getPos().offset(EnumFacing.DOWN));
+            return BlockKitchenPlug.findClosest(world, getPos());
         }
 
         @Override
