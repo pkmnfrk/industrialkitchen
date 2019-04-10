@@ -18,6 +18,6 @@ public class BlockKitchenTap
 
     public static BlockPos findClosest(@Nonnull World world, @Nonnull BlockPos start)
     {
-        return MultiblockUtil.walkMultiblock(world, start, BlockKitchenBase.class, block -> block.getBlock() instanceof BlockKitchenTap);
+        return MultiblockUtil.walkMultiblock(world, start, BlockKitchenBase.class, (block, pos) -> block.getBlock() instanceof BlockKitchenTap);
     }
 }

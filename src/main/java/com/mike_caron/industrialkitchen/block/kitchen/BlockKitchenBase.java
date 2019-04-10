@@ -1,19 +1,21 @@
 package com.mike_caron.industrialkitchen.block.kitchen;
 
+import com.mike_caron.industrialkitchen.tileentity.appliance.TileEntityAppliance;
+import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenBase;
 import com.mike_caron.mikesmodslib.block.BlockBase;
+import com.mike_caron.mikesmodslib.util.MultiblockUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.HashSet;
 import java.util.List;
-import java.util.PriorityQueue;
 
 public class BlockKitchenBase
     extends BlockBase
@@ -102,65 +104,38 @@ public class BlockKitchenBase
         return state.getBlock() instanceof BlockKitchenBase;
     }
 
-    public static BlockPos findClosest(@Nonnull World world, @Nonnull BlockPos start, Class<? extends BlockKitchenBase> search)
+    @Override
+    public void breakBlock(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
     {
-        HashSet<Long> explored = new HashSet<>();
-        PriorityQueue<DistPos> toExplore = new PriorityQueue<>(DistPos::compare);
+        super.breakBlock(worldIn, pos, state);
 
-        toExplore.add(new DistPos(start, 0));
-
-        while(!toExplore.isEmpty())
-        {
-            DistPos spot = toExplore.remove();
-
-            if(explored.contains(spot.toLong()))
-                continue;
-
-            explored.add(spot.toLong());
-
-            IBlockState block = world.getBlockState(spot);
-
-            if(!(block.getBlock() instanceof BlockKitchenBase))
-                continue;
-
-            if(search.isInstance(block.getBlock()))
-                return spot;
-
-            for(EnumFacing dir : EnumFacing.VALUES)
-            {
-                toExplore.add(spot.offset(dir));
-            }
-        }
-
-        return null;
+        refreshConnections(worldIn, pos);
     }
 
-    private static class DistPos
-        extends BlockPos
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
-        public final int dist;
+        super.onBlockAdded(worldIn, pos, state);
 
-        DistPos(BlockPos pos, int distance)
-        {
-            super(pos.getX(), pos.getY(), pos.getZ());
+        refreshConnections(worldIn, pos);
+    }
 
-            this.dist = distance;
-        }
+    private void refreshConnections(@Nonnull World worldIn, @Nonnull BlockPos pos)
+    {
+        MultiblockUtil.walkMultiblock(worldIn, pos, (block, spot) -> {
 
-        public static int compare(DistPos a, DistPos b)
-        {
-            int ret = b.dist - a.dist;
+            TileEntity te = worldIn.getTileEntity(spot);
+            if(te instanceof TileEntityKitchenBase)
+            {
+                ((TileEntityKitchenBase) te).refreshConnections();
+            }
+            else if(te instanceof TileEntityAppliance)
+            {
+                ((TileEntityAppliance) te).refreshConnections();
+            }
 
-            if(ret != 0) return ret;
+            return block.getBlock() instanceof BlockKitchenBase || spot.equals(pos);
 
-            return a.compareTo(b);
-        }
-
-        @Override
-        @Nonnull
-        public DistPos offset(@Nonnull EnumFacing facing)
-        {
-            return new DistPos(super.offset(facing), dist + 1);
-        }
+        }, (block, spot) -> false);
     }
 }

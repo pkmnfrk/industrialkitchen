@@ -1,6 +1,6 @@
 package com.mike_caron.industrialkitchen.block.appliance;
 
-import com.mike_caron.industrialkitchen.tileentity.TileEntityHotplate;
+import com.mike_caron.industrialkitchen.tileentity.appliance.TileEntityHotplate;
 import com.mike_caron.mikesmodslib.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

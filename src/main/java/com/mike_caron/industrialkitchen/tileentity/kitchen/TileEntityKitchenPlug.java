@@ -1,14 +1,8 @@
-package com.mike_caron.industrialkitchen.tileentity;
+package com.mike_caron.industrialkitchen.tileentity.kitchen;
 
-import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenBase;
-import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
-import com.mike_caron.mikesmodslib.block.TileEntityBase;
 import com.mike_caron.mikesmodslib.energy.SerializableEnergyStorage;
-import com.mike_caron.mikesmodslib.util.MultiblockUtil;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
@@ -16,7 +10,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityKitchenPlug
-    extends TileEntityBase
+    extends TileEntityKitchenBase
 {
     SerializableEnergyStorage energy = new SerializableEnergyStorage(10000);
 
@@ -57,11 +51,4 @@ public class TileEntityKitchenPlug
 
         return compound;
     }
-
-    public static BlockPos findClosest(@Nonnull World world, @Nonnull BlockPos start)
-    {
-        return MultiblockUtil.walkMultiblock(world, start, BlockKitchenBase.class, block -> block.getBlock() instanceof BlockKitchenPlug);
-    }
-
-
 }

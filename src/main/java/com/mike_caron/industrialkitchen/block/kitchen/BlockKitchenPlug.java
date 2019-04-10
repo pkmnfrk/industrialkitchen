@@ -1,8 +1,10 @@
 package com.mike_caron.industrialkitchen.block.kitchen;
 
-import com.mike_caron.industrialkitchen.tileentity.TileEntityKitchenPlug;
+import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenPlug;
+import com.mike_caron.mikesmodslib.util.MultiblockUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -30,4 +32,20 @@ public class BlockKitchenPlug
     {
         return new TileEntityKitchenPlug();
     }
+
+    protected TileEntityKitchenPlug getTileEntity(@Nonnull World world, @Nonnull BlockPos pos)
+    {
+        TileEntity ret = world.getTileEntity(pos);
+        if(ret instanceof TileEntityKitchenPlug)
+            return (TileEntityKitchenPlug)ret;
+
+        return null;
+    }
+
+    public static BlockPos findClosest(@Nonnull World world, @Nonnull BlockPos start)
+    {
+        return MultiblockUtil.walkMultiblock(world, start, BlockKitchenBase.class, (block, pos) -> block.getBlock() instanceof BlockKitchenPlug);
+    }
+
+
 }

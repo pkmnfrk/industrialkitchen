@@ -1,7 +1,8 @@
-package com.mike_caron.industrialkitchen.tileentity;
+package com.mike_caron.industrialkitchen.tileentity.appliance;
 
+import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
 import com.mike_caron.industrialkitchen.item.ModItems;
-import com.mike_caron.mikesmodslib.block.TileEntityBase;
+import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenPlug;
 import com.mike_caron.mikesmodslib.util.TileEntityProxy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -10,14 +11,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityHotplate
-    extends TileEntityBase
-    implements ITickable
+    extends TileEntityAppliance implements ITickable
 {
     ItemStack tool;
 
@@ -25,9 +24,9 @@ public class TileEntityHotplate
     {
         @Nullable
         @Override
-        protected BlockPos findTileEntity(@Nonnull World world)
+        protected BlockPos findTileEntity()
         {
-            return TileEntityKitchenPlug.findClosest(world, getPos().offset(EnumFacing.DOWN));
+            return BlockKitchenPlug.findClosest(world, getPos().offset(EnumFacing.DOWN));
         }
 
         @Override
@@ -126,9 +125,14 @@ public class TileEntityHotplate
     @Override
     public void update()
     {
-        TileEntityKitchenPlug plugEntity = plug.getTileEntity(world);
+        //TileEntityKitchenPlug plugEntity = plug.getTileEntity(world);
 
+    }
 
+    @Override
+    public void refreshConnections()
+    {
+        plug.invalidate();
     }
 
     public enum EnumTool
