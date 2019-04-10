@@ -3,6 +3,7 @@ package com.mike_caron.industrialkitchen.tileentity.appliance;
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
 import com.mike_caron.industrialkitchen.item.ModItems;
 import com.mike_caron.industrialkitchen.item.cookware.ItemPan;
+import com.mike_caron.industrialkitchen.item.cookware.ItemPot;
 import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenPlug;
 import com.mike_caron.mikesmodslib.util.TileEntityProxy;
 import net.minecraft.block.state.IBlockState;
@@ -45,6 +46,9 @@ public class TileEntityHotplate
         if(tool.getItem() == ModItems.pan)
             return EnumTool.PAN;
 
+        if(tool.getItem() == ModItems.pot)
+            return EnumTool.POT;
+
         return EnumTool.NONE;
     }
 
@@ -54,6 +58,9 @@ public class TileEntityHotplate
             return true;
 
         if(itemStack.getItem() instanceof ItemPan)
+            return true;
+
+        if(itemStack.getItem() instanceof ItemPot)
             return true;
 
         return false;

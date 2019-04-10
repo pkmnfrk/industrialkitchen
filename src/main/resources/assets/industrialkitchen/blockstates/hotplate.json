@@ -16,6 +16,7 @@
         "submodel": "industrialkitchen:frying_pan"
       },
       "pot": {
+        "submodel": "industrialkitchen:pot"
       }
     },
     "lit": {
