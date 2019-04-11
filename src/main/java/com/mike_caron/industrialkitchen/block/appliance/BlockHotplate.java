@@ -3,6 +3,7 @@ package com.mike_caron.industrialkitchen.block.appliance;
 import com.mike_caron.industrialkitchen.block.Props;
 import com.mike_caron.industrialkitchen.tileentity.appliance.TileEntityHotplate;
 import com.mike_caron.mikesmodslib.block.BlockBase;
+import com.mike_caron.mikesmodslib.util.FluidUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -74,14 +76,23 @@ public class BlockHotplate
         TileEntityHotplate tileEntity = getTileEntity(worldIn, pos, TileEntityHotplate.class);
         if(tileEntity != null)
         {
+
+            if(FluidUtils.fillPlayerHandWithFluid(worldIn, pos, playerIn, tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)))
+                return true;
+
+            if(FluidUtils.drainPlayerHandOfFluid(worldIn, pos, playerIn, tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)))
+                return true;
+
             ItemStack handItem = playerIn.getHeldItem(hand);
 
             handItem = tileEntity.insertTool(handItem);
 
             playerIn.setHeldItem(hand, handItem);
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
