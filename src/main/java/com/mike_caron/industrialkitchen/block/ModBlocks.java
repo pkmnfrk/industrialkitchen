@@ -6,11 +6,14 @@ import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenBlank;
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenOven;
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenTap;
+import com.mike_caron.industrialkitchen.fluid.ModFluids;
 import com.mike_caron.industrialkitchen.tileentity.appliance.TileEntityHotplate;
 import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenOven;
 import com.mike_caron.industrialkitchen.tileentity.kitchen.TileEntityKitchenPlug;
 import com.mike_caron.mikesmodslib.block.BlockBase;
+import com.mike_caron.mikesmodslib.block.BlockFluidBase;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -44,6 +47,10 @@ public class ModBlocks
     @GameRegistry.ObjectHolder(BlockHotplate.ID)
     public static BlockHotplate hotplate;
 
+    @GameRegistry.ObjectHolder("generic_fluid")
+    public static BlockFluidBase generic_fluid;
+
+    //public static BlockFluidBase fluids[];
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -56,9 +63,20 @@ public class ModBlocks
         registry.register(new BlockKitchenOven());
         registry.register(new BlockHotplate());
 
+        registry.register(new BlockFluidBase(ModFluids.generic_fluid, ModFluids.generic_fluid.getName(), MapColor.BLUE));
+
         GameRegistry.registerTileEntity(TileEntityHotplate.class, new ResourceLocation(IndustrialKitchen.modId, BlockHotplate.ID));
         GameRegistry.registerTileEntity(TileEntityKitchenPlug.class, new ResourceLocation(IndustrialKitchen.modId, BlockKitchenPlug.ID));
         GameRegistry.registerTileEntity(TileEntityKitchenOven.class, new ResourceLocation(IndustrialKitchen.modId, BlockKitchenOven.ID));
+
+/*
+        fluids = new BlockFluidBase[ModFluids.fluids.size()];
+        int i = 0;
+        for(Map.Entry<String, FluidBase> fluid : ModFluids.fluids.entrySet())
+        {
+            registry.register(fluids[i++] = new BlockDynamicFluid(fluid.getValue(), fluid.getKey()));
+        }
+*/
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -107,5 +125,13 @@ public class ModBlocks
         {
             throw new RuntimeException("Unable to reflect upon myelf??");
         }
+
+        generic_fluid.render();
+/*
+        for(BlockFluidBase fluid : fluids)
+        {
+            fluid.render();
+        }
+*/
     }
 }

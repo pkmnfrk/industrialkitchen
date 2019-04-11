@@ -2,6 +2,7 @@ package com.mike_caron.industrialkitchen;
 
 import com.mike_caron.industrialkitchen.integrations.MainCompatHandler;
 import com.mike_caron.industrialkitchen.proxy.IModProxy;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
@@ -36,6 +37,10 @@ public class IndustrialKitchen
             clientSide = "com.mike_caron.industrialkitchen.proxy.ClientProxy"
     )
     public static IModProxy proxy;
+
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
 
     @Mod.EventHandler
     public  void preInit(FMLPreInitializationEvent event)

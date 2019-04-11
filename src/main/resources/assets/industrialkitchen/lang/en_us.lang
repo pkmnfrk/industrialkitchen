@@ -5,3 +5,6 @@ tile.industrialkitchen:kitchen_tap.name=Kitchen Plug
 tile.industrialkitchen:kitchen_oven.name=Oven
 
 item.frying_pan.name=Frying Pan
+
+fluid.raw_egg=Raw Egg
+fluid.liquid_blueberry=Liquid Blueberry
