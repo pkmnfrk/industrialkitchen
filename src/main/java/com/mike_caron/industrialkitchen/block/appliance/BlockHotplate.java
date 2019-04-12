@@ -199,5 +199,4 @@ public class BlockHotplate
     {
         return false;
     }
-
 }

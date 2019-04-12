@@ -1,6 +1,8 @@
 package com.mike_caron.industrialkitchen.tileentity.appliance;
 
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
+import com.mike_caron.industrialkitchen.heat.CapabilityHeatSink;
+import com.mike_caron.industrialkitchen.heat.IHeatSink;
 import com.mike_caron.industrialkitchen.item.ModItems;
 import com.mike_caron.industrialkitchen.item.cookware.ItemPan;
 import com.mike_caron.industrialkitchen.item.cookware.ItemPot;
@@ -162,6 +164,23 @@ public class TileEntityHotplate
     public void update()
     {
         //TileEntityKitchenPlug plugEntity = plug.getTileEntity(world);
+        //temp:
+        if(tool != null)
+        {
+            if (isValid())
+            {
+                IHeatSink heat = tool.getCapability(CapabilityHeatSink.CAPABILITY, null);
+
+                if (heat != null)
+                {
+                    heat.addEnergy(15 * heat.conductance());
+                }
+            }
+
+            tool.getItem().onUpdate(tool, world, null, 0, true);
+            markDirty();
+        }
+
 
     }
 
@@ -200,6 +219,10 @@ public class TileEntityHotplate
         {
             return adapter.isActive();
         }
+        else if(capability == CapabilityHeatSink.CAPABILITY && tool != null)
+        {
+            return tool.hasCapability(capability, facing);
+        }
 
         return super.hasCapability(capability, facing);
     }
@@ -212,6 +235,10 @@ public class TileEntityHotplate
         {
             if(adapter.isActive())
                 return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(adapter);
+        }
+        else if(capability == CapabilityHeatSink.CAPABILITY && tool != null)
+        {
+            return tool.getCapability(capability, facing);
         }
 
         return super.getCapability(capability, facing);

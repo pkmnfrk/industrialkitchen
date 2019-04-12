@@ -1,0 +1,7 @@
+<temp_changes>
+    <fluid id="lava" max_temp="1000" result_item="minecraft:obsidian" />
+    <fluid id="water" max_temp="273" result_item="minecraft:ice" />
+    <item id="minecraft:ice" min_temp="273" result_fluid="water" />
+    <item id="minecraft:obsidian" min_temp="1000" result_fluid="lava" />
+
+</temp_changes>

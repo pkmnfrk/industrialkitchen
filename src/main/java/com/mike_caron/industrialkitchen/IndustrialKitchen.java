@@ -1,5 +1,6 @@
 package com.mike_caron.industrialkitchen;
 
+import com.mike_caron.industrialkitchen.heat.CapabilityHeatSink;
 import com.mike_caron.industrialkitchen.integrations.MainCompatHandler;
 import com.mike_caron.industrialkitchen.proxy.IModProxy;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -46,6 +47,8 @@ public class IndustrialKitchen
     public  void preInit(FMLPreInitializationEvent event)
     {
         proxy.preInit(event);
+
+        CapabilityHeatSink.register();
 
         MainCompatHandler.registerAll();
     }
