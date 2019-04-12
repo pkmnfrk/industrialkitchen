@@ -2,7 +2,9 @@ package com.mike_caron.industrialkitchen.tileentity.appliance;
 
 import com.mike_caron.industrialkitchen.block.kitchen.BlockKitchenPlug;
 import com.mike_caron.industrialkitchen.heat.CapabilityHeatSink;
+import com.mike_caron.industrialkitchen.heat.ConstantHeatSink;
 import com.mike_caron.industrialkitchen.heat.IHeatSink;
+import com.mike_caron.industrialkitchen.heat.MaterialHeatSink;
 import com.mike_caron.industrialkitchen.item.ModItems;
 import com.mike_caron.industrialkitchen.item.cookware.ItemPan;
 import com.mike_caron.industrialkitchen.item.cookware.ItemPot;
@@ -28,6 +30,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import org.cyclops.commoncapabilities.api.capability.temperature.DefaultTemperature;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -40,6 +43,7 @@ public class TileEntityHotplate
     ItemStack tool;
 
     final ToolFluidAdapter adapter = new ToolFluidAdapter();
+    final ConstantHeatSink hotPlate = new ConstantHeatSink(DefaultTemperature.ZERO_CELCIUS + 200);
 
     TileEntityProxy<TileEntityKitchenPlug> plug = new TileEntityProxy<TileEntityKitchenPlug>()
     {
@@ -165,16 +169,23 @@ public class TileEntityHotplate
     {
         //TileEntityKitchenPlug plugEntity = plug.getTileEntity(world);
         //temp:
+
+        if (isValid())
+        {
+            hotPlate.setTemperature(DefaultTemperature.ZERO_CELCIUS + 200);
+        }
+        else
+        {
+            hotPlate.setTemperature(DefaultTemperature.ZERO_CELCIUS + 20);
+        }
+
         if(tool != null)
         {
-            if (isValid())
-            {
-                IHeatSink heat = tool.getCapability(CapabilityHeatSink.CAPABILITY, null);
+            IHeatSink heat = tool.getCapability(CapabilityHeatSink.CAPABILITY, null);
 
-                if (heat != null)
-                {
-                    heat.addEnergy(15 * heat.conductance());
-                }
+            if (heat != null && isValid())
+            {
+                MaterialHeatSink.equalize(hotPlate, heat);
             }
 
             tool.getItem().onUpdate(tool, world, null, 0, true);

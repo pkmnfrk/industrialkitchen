@@ -1,4 +1,4 @@
 <fluids>
-    <fluid id="raw_egg" color="#ffff00" />
-    <fluid id="liquid_blueberry" color="#0000ff" />
+    <fluid id="raw_egg" color="#ffff00" temperature="293" density="800" specificHeat="2" conductivity="0.7" />
+    <fluid id="liquid_blueberry" color="#0000ff" temperature="293" density="3000" specificHeat="2.3" conductivity="0.3" />
 </fluids>

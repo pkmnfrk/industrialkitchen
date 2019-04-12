@@ -103,7 +103,7 @@ public abstract class ItemCookwareBase
 
         if(fluidHeatSink != null)
         {
-            MaterialHeatSink.equalize(fluidHeatSink, AirHeatSink.INSTANCE);
+            //MaterialHeatSink.equalize(fluidHeatSink, AirHeatSink.INSTANCE);
         }
 
     }

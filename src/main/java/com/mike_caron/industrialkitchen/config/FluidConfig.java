@@ -2,7 +2,8 @@ package com.mike_caron.industrialkitchen.config;
 
 import com.mike_caron.industrialkitchen.IndustrialKitchen;
 import com.mike_caron.industrialkitchen.fluid.ModFluids;
-import com.mike_caron.mikesmodslib.fluid.FluidBase;
+import com.mike_caron.industrialkitchen.fluid.PhysicsFluid;
+import com.mike_caron.industrialkitchen.heat.PhysicsMaterial;
 import net.minecraft.util.ResourceLocation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,14 +31,15 @@ public class FluidConfig
     {
         String name = fluidEl.getAttribute("id");
 
-        FluidBase fluid;
+        PhysicsFluid fluid;
 
-        fluid = new FluidBase(name,
+        fluid = new PhysicsFluid(name,
             new ResourceLocation(IndustrialKitchen.modId, "fluids/fluid_still"),
             new ResourceLocation(IndustrialKitchen.modId, "fluids/fluid_flow"),
             false
         );
 
+        PhysicsMaterial.Builder mat = PhysicsMaterial.builder(PhysicsMaterial.WATER);
 
         colorAttribute(fluidEl, "color").ifPresent(fluid::setColor);
         intAttribute(fluidEl, "alpha").ifPresent(fluid::setAlpha);
@@ -45,6 +47,10 @@ public class FluidConfig
         intAttribute(fluidEl, "luminosity").ifPresent(fluid::setLuminosity);
         intAttribute(fluidEl, "temperature").ifPresent(fluid::setTemperature);
         intAttribute(fluidEl, "viscosity").ifPresent(fluid::setViscosity);
+        doubleAttribute(fluidEl, "specificHeat").ifPresent(mat::setSpecificHeat);
+        doubleAttribute(fluidEl, "conductivity").ifPresent(mat::setConductance);
+
+        fluid.setPhysicsMaterial(mat.build());
 
         ModFluids.fluids.put(name, fluid);
 

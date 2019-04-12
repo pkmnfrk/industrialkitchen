@@ -1,21 +1,13 @@
 package com.mike_caron.industrialkitchen.heat;
 
 public class AirHeatSink
-    implements IHeatSink
+    extends ConstantHeatSink
 {
     public static final AirHeatSink INSTANCE = new AirHeatSink();
 
-    @Override
-    public void addEnergy(double energy)
+    public AirHeatSink()
     {
-
-    }
-
-    @Override
-    public double energyForTempChange(double delta)
-    {
-        //basically infinite
-        return 10000000;
+        super(MaterialHeatSink.ROOM_TEMPERATURE);
     }
 
     @Override
@@ -25,26 +17,13 @@ public class AirHeatSink
     }
 
     @Override
-    public double getTemperature()
+    public void setTemperature(double temperature)
     {
-        return MaterialHeatSink.ROOM_TEMPERATURE;
     }
 
     @Override
-    public double getMaximumTemperature()
+    public double energyForTempChange(double delta)
     {
-        return MaterialHeatSink.ROOM_TEMPERATURE;
-    }
-
-    @Override
-    public double getMinimumTemperature()
-    {
-        return MaterialHeatSink.ROOM_TEMPERATURE;
-    }
-
-    @Override
-    public double getDefaultTemperature()
-    {
-        return MaterialHeatSink.ROOM_TEMPERATURE;
+        return 10000000;
     }
 }

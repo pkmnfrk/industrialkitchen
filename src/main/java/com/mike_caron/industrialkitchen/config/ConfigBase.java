@@ -33,4 +33,13 @@ public class ConfigBase
         }
         return Optional.empty();
     }
+
+    protected static Optional<Double> doubleAttribute(Element el, String name)
+    {
+        if(el.hasAttribute(name))
+        {
+            return Optional.of(Double.parseDouble(el.getAttribute(name)));
+        }
+        return Optional.empty();
+    }
 }

@@ -69,7 +69,11 @@ public class FluidHandlerHeatSink
 
         if(doFill)
         {
-            FluidStack newStack = new FluidStack(resource.getFluid(), amount);
+            int amt2 = amount;
+            if(curStack != null)
+                amt2 += curStack.amount;
+
+            FluidStack newStack = new FluidStack(resource.getFluid(), amt2);
             setFluid(newStack);
 
             PhysicsMaterial mat = getMaterial();
@@ -79,7 +83,7 @@ public class FluidHandlerHeatSink
             }
             else
             {
-                addEnergy(mat.energy(massForFluid(newStack.getFluid(), newStack.amount - curStack.amount), getDefaultTempForFluid(newStack.getFluid())));
+                addEnergy(mat.energy(massForFluid(newStack.getFluid(), newStack.amount - curStack.amount), getDefaultTempForFluid(newStack.getFluid()) -  getTemperature()));
             }
         }
 

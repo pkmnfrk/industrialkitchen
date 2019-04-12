@@ -82,25 +82,25 @@ public class MaterialHeatSink
         double bTemp = b.getTemperature();
         double aDelta = (bTemp - aTemp) / 2;
 
-        aDelta *= a.conductance() * b.conductance();
+        aDelta *= Math.min(a.conductance(), b.conductance());
 
         if(Math.abs(aDelta) < 0.01) //eh, close enough
             return;
 
         double bDelta = -aDelta;
 
-        double aEnergy = a.energyForTempChange(aDelta);
-        double bEnergy = b.energyForTempChange(bDelta);
+        double aEnergy = a.energyForTempChange(aDelta) * 0.05;
+        double bEnergy = b.energyForTempChange(bDelta) * 0.05;
 
         if(Math.abs(aEnergy) < Math.abs(bEnergy))
         {
-            a.addEnergy(aDelta);
-            b.addEnergy(-aDelta);
+            a.addEnergy(aEnergy);
+            b.addEnergy(-aEnergy);
         }
         else
         {
-            a.addEnergy(bDelta);
-            b.addEnergy(-bDelta);
+            a.addEnergy(-bEnergy);
+            b.addEnergy(bEnergy);
         }
     }
 
