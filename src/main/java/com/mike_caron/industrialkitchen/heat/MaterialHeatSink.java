@@ -12,12 +12,13 @@ public class MaterialHeatSink
     implements IHeatSink, INBTSerializable<NBTBase>
 {
     public static final double ROOM_TEMPERATURE = DefaultTemperature.ZERO_CELCIUS + 20;
-    public static final double MIN_TEMPERATURE = DefaultTemperature.ZERO_CELCIUS - 20;
-    public static final double MAX_TEMPERATURE = DefaultTemperature.ZERO_CELCIUS + 300;
+    //public static final double MIN_TEMPERATURE = DefaultTemperature.ZERO_CELCIUS - 20;
+    //public static final double MAX_TEMPERATURE = DefaultTemperature.ZERO_CELCIUS + 300;
 
     private double mass;
     private PhysicsMaterial material;
     protected double energy;
+    protected double defaultTemp;
 
     protected MaterialHeatSink() {}
 
@@ -30,31 +31,38 @@ public class MaterialHeatSink
     {
         this.mass = mass;
         this.material = material;
+        this.defaultTemp = initialTemp;
         this.energy = material.energy(mass, initialTemp);
     }
 
     @Override
     public double getTemperature()
     {
-        return getMaterial().temperature(getMass(), getEnergy());
+        return Math.min(
+            getMaximumTemperature(),
+            Math.max(
+                getMinimumTemperature(),
+                getMaterial().temperature(getMass(), getEnergy())
+            )
+        );
     }
 
     @Override
     public double getMaximumTemperature()
     {
-        return DefaultTemperature.ZERO_CELCIUS;
+        return getMaterial().maxTemperature;
     }
 
     @Override
     public double getMinimumTemperature()
     {
-        return MIN_TEMPERATURE;
+        return getMaterial().minTemperature;
     }
 
     @Override
     public double getDefaultTemperature()
     {
-        return MAX_TEMPERATURE;
+        return defaultTemp;
     }
 
     public void addEnergy(double energy)
@@ -72,6 +80,27 @@ public class MaterialHeatSink
     public double conductance()
     {
         return getMaterial().conductance;
+    }
+
+    @Override
+    public double excessEnergy()
+    {
+        double max = getMaximumTemperature();
+        double min = getMinimumTemperature();
+        double temp = getTemperature();
+
+        if(temp < min)
+        {
+            double minEnergy = getMaterial().energy(getMass(), min);
+            return getEnergy() - minEnergy;
+        }
+        else if(temp > max)
+        {
+            double maxEnergy = getMaterial().energy(getMass(), max);
+            return getEnergy() - maxEnergy;
+        }
+
+        return 0;
     }
 
     public static void equalize(IHeatSink a, IHeatSink b)

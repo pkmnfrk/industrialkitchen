@@ -1,4 +1,12 @@
 <fluids>
-    <fluid id="raw_egg" color="#ffff00" temperature="293" density="800" specificHeat="2" conductivity="0.7" />
+    <fluid id="lava">
+        <freezes energy="1000" item="minecraft:obsidian" amount="1000" />
+    </fluid>
+    <fluid id="water">
+        <freezes energy="1000" item="minecraft:ice" amount="1000" />
+    </fluid>
+    <fluid id="raw_egg" color="#ffff00" temperature="293" density="800" specificHeat="2" conductivity="0.7">
+        <boils at="323" energy="100" item="minecraft:egg" amount="100" />
+    </fluid>
     <fluid id="liquid_blueberry" color="#0000ff" temperature="293" density="3000" specificHeat="2.3" conductivity="0.3" />
 </fluids>

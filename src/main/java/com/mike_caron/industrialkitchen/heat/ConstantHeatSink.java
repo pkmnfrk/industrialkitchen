@@ -56,4 +56,10 @@ public class ConstantHeatSink
     {
         return temperature;
     }
+
+    @Override
+    public double excessEnergy()
+    {
+        return 0;
+    }
 }

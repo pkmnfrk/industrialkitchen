@@ -1,6 +1,10 @@
 package com.mike_caron.industrialkitchen.config;
 
+import com.mike_caron.industrialkitchen.recipes.FluidStackPromise;
+import com.mike_caron.industrialkitchen.util.FluidStackUtils;
+import com.mike_caron.mikesmodslib.util.ItemUtils;
 import com.mike_caron.mikesmodslib.util.StringUtil;
+import net.minecraft.item.ItemStack;
 import org.w3c.dom.Element;
 
 import java.util.Optional;
@@ -39,6 +43,26 @@ public class ConfigBase
         if(el.hasAttribute(name))
         {
             return Optional.of(Double.parseDouble(el.getAttribute(name)));
+        }
+        return Optional.empty();
+    }
+
+    protected static Optional<ItemStack> itemStackAttribute(Element el, String name)
+    {
+        if(el.hasAttribute(name))
+        {
+            String txt = el.getAttribute(name);
+            return Optional.of(ItemUtils.getStackFromTag(txt));
+        }
+        return Optional.empty();
+    }
+
+    protected static Optional<FluidStackPromise> fluidStackPromiseAttribute(Element el, String name)
+    {
+        if(el.hasAttribute(name))
+        {
+            String txt = el.getAttribute(name);
+            return Optional.of(FluidStackUtils.getFluidPromiseFromTag(txt));
         }
         return Optional.empty();
     }

@@ -8,4 +8,5 @@ public interface IHeatSink
     void addEnergy(double energy);
     double energyForTempChange(double delta);
     double conductance();
+    double excessEnergy();
 }
